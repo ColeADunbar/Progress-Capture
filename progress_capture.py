@@ -1,5 +1,4 @@
 # Progress_Capture
-
 from tkinter import *
 import time
 
@@ -12,8 +11,9 @@ go off every X=40 minutes and asks you to log what you have accomplished in thos
 X mins
 
 """
+
 another=True
-duration=1
+duration=0
 WIDTH=25
 goallist=[]
 
@@ -25,32 +25,28 @@ with open("goallist.txt","r") as goallisthandle:
     goallist=goallisthandle.readlines()
     goallist=listclean(goallist)
 
-if True:#change to skip this part
+if True:
+    #review/get new goals
     print("enter goals seperated by 'return':\n")
-    print(*goallist, sep="")
-    x=input()
-    while x!="":
-        x=input()
+    x=input("".join(goallist))
+    while x.strip()!="":
         goallist.append(x)
-    print("your list of goals: ")
-    print("pick timer duration, default {} mins:\t".format(duration))
-    y=input()
+        x=input()
+    #set timer
+    y=input("pick timer duration, default {} mins:\t".format(duration))
     try:
         float(y)
         duration=int(y)
     except ValueError:
         print("that doesn't look like a number, moving on with duration={} mins".format(duration))
-    print()
-    print("~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~")
-    print()
-
+    print("\n~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~\n")
 
 while another==True:
     #make a timer
     print("sleeping for {} minutes...".format(duration))
     for i in range(duration):
         time.sleep(60)
-    print("done sleeping!")
+    print("done sleeping!\n")
 
     #make a new window
     root=Tk();
@@ -155,7 +151,7 @@ with open("goallist.txt","w") as goallisthandle:
     for i in listclean(goallist):
         goallisthandle.write(i)
 
-print("okay, good work today")
-print("\n Goals you still have:")
+print("Okay, good work today")
+print("Goals you still have:\n")
 print(*goallist, sep="")
 
