@@ -1,5 +1,5 @@
 # Progress_Capture
-"test"
+
 from tkinter import *
 import time
 
